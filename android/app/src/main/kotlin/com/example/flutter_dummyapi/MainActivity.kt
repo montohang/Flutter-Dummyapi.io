@@ -1,4 +1,4 @@
-package com.example.flutter_dummyapi
+package com.example.flutter_thesportdb
 
 import io.flutter.embedding.android.FlutterActivity
 
