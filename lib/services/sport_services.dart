@@ -1,11 +1,11 @@
 part of 'services.dart';
 
-class LeagueServices {
-  static Future<ApiReturnValue<List<League>>> getLeagues(
+class SportServices {
+  static Future<ApiReturnValue<List<Sport>>> getSports(
       {http.Client client}) async {
     client ??= http.Client();
 
-    String url = baseLeagueURL;
+    String url = baseSportURL;
 
     var response = await client.get(url);
 
@@ -17,8 +17,9 @@ class LeagueServices {
 
     print('data dari service : $data');
 
-    List<League> leagues =
-        (data['leagues'] as Iterable).map((e) => League.fromJson(e)).toList();
-    return ApiReturnValue(value: leagues);
+    List<Sport> sports =
+        (data['sports'] as Iterable).map((e) => Sport.fromJson(e)).toList();
+
+    return ApiReturnValue(value: sports);
   }
 }

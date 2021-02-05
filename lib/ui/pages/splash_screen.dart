@@ -1,4 +1,4 @@
-part of 'widgets.dart';
+part of 'pages.dart';
 
 class SplashScreen extends StatelessWidget {
   @override
@@ -6,10 +6,8 @@ class SplashScreen extends StatelessWidget {
     Widget splashScreen = SplashScreenView(
       home: LeaguePage(),
       duration: 3000,
-      imageSize: 100,
+      imageSize: 125,
       imageSrc: "assets/logo.png",
-      text: "Sport DB",
-      textType: TextType.TyperAnimatedText,
       textStyle: blackFontSytle1.copyWith(color: Colors.white),
       backgroundColor: mainColor,
     );

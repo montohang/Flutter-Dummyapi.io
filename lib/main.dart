@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_thesportdb/ui/widgets/widgets.dart';
+import 'package:flutter_thesportdb/ui/pages/pages.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
 import 'cubit/league_cubit.dart';

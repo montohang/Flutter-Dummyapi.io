@@ -18,12 +18,10 @@ class _LeaguePageState extends State<LeaguePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Leagues'),
-        centerTitle: true,
-      ),
-      body: Container(
+    return GeneralPage(
+      title: 'Leagues',
+      subtitle: 'Let’s get list of the best leagues',
+      child: Container(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           child: BlocBuilder<LeagueCubit, LeagueState>(
