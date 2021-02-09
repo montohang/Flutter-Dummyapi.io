@@ -1,21 +1,27 @@
 part of 'pages.dart';
 
 class LeagueOfCountryPage extends StatefulWidget {
-  // final LeaguesOfCountry leaguesOfCountry;
+  final String leagueName;
 
-  // LeagueOfCountryPage({this.leaguesOfCountry});
+  LeagueOfCountryPage({this.leagueName = ''});
   @override
   _LeagueOfCountryPageState createState() => _LeagueOfCountryPageState();
 }
 
 class _LeagueOfCountryPageState extends State<LeagueOfCountryPage> {
-  LeaguesOfCountryCubit leagueCubit = LeaguesOfCountryCubit();
+  // LeaguesOfCountryCubit leagueCubit = LeaguesOfCountryCubit();
+  LeaguesOfCountryCubit leaguesOfCountryCubit;
 
+  LeaguesOfCountry leaguesOfCountry;
   // _LeagueOfCountryPageState(this.leaguesOfCountry);
 
   @override
   void initState() {
-    context.read<LeaguesOfCountryCubit>().getLeaguesOfCountry('England');
+    context
+        .read<LeaguesOfCountryCubit>()
+        .getLeaguesOfCountry(widget.leagueName);
+    // leaguesOfCountryCubit.getLeaguesOfCountry(leaguesOfCountry.id);
+    // leaguesOfCountryCubit = BlocProvider.of<LeaguesOfCountryCubit>(context);
     super.initState();
   }
 

@@ -36,7 +36,8 @@ class _LeaguePageState extends State<LeaguePage> {
                           title: Text(league.name),
                           subtitle: Text(league.division),
                           onTap: () {
-                            Get.to(LeagueOfCountryPage());
+                            Get.to(LeagueOfCountryPage(
+                                leagueName: leaguesOfCountry.name));
                           },
                         ),
                       );
