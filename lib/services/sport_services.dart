@@ -5,7 +5,7 @@ class SportServices {
       {http.Client client}) async {
     client ??= http.Client();
 
-    String url = baseSportURL;
+    String url = baseUrl;
 
     var response = await client.get(url);
 

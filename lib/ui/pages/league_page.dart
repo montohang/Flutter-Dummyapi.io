@@ -6,14 +6,14 @@ class LeaguePage extends StatefulWidget {
 }
 
 class _LeaguePageState extends State<LeaguePage> {
-  // List<League> leagues = [];
-
   LeagueCubit leagueCubit = LeagueCubit();
+
+  LeaguesOfCountry leaguesOfCountry;
 
   @override
   void initState() {
-    super.initState();
     context.read<LeagueCubit>().getLeagues();
+    super.initState();
   }
 
   @override
@@ -26,25 +26,24 @@ class _LeaguePageState extends State<LeaguePage> {
           width: MediaQuery.of(context).size.width,
           child: BlocBuilder<LeagueCubit, LeagueState>(
             builder: (_, state) => (state is LeagueLoaded)
-                ? ListView(
-                    children: [
-                      Column(
-                        children: state.leagues
-                            .map((e) => Card(
-                                  elevation: 1,
-                                  child: ListTile(
-                                    title: Text(e.league),
-                                    subtitle: Text(e.sport),
-                                    onTap: () {
-                                      Get.to(LeagueDetailPage());
-                                    },
-                                  ),
-                                ))
-                            .toList(),
-                      )
-                    ],
-                  )
-                : Center(child: loadingIndicator),
+                ? ListView.builder(
+                    itemCount: state.leagues.length,
+                    itemBuilder: (context, index) {
+                      League league = state.leagues[index];
+                      return Card(
+                        elevation: 1,
+                        child: ListTile(
+                          title: Text(league.name),
+                          subtitle: Text(league.division),
+                          onTap: () {
+                            Get.to(LeagueOfCountryPage());
+                          },
+                        ),
+                      );
+                    })
+                : Center(
+                    child: loadingIndicator,
+                  ),
           )),
     );
   }

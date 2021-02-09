@@ -16,6 +16,14 @@ class LeagueLoaded extends LeagueState {
 
   @override
   List<Object> get props => [leagues];
+
+  LeagueLoaded copyWith({
+    List<League> leagues,
+  }) {
+    return LeagueLoaded(
+      leagues ?? this.leagues,
+    );
+  }
 }
 
 class LeagueLoadingFailed extends LeagueState {

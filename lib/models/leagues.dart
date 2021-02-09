@@ -2,36 +2,30 @@ part of 'models.dart';
 
 class League extends Equatable {
   final String id;
-  final String league;
-  final String sport;
-  final String leagueAlternate;
+  final String name;
+  final String division;
+  final String season;
+  final String badge;
 
-  League({this.id, this.league, this.sport, this.leagueAlternate});
+  League({this.id, this.name, this.division, this.season, this.badge});
 
   factory League.fromJson(Map<String, dynamic> json) => League(
       id: json['idLeague'],
-      league: json['strLeague'],
-      sport: json['strSport'],
-      leagueAlternate: json['strLeagueAlternate']);
+      name: json['strLeague'],
+      division: json['strDivision'],
+      season: json['strCurrentSeason'],
+      badge: json['strBadge']);
 
   @override
-  List<Object> get props => [id, league, sport, leagueAlternate];
+  List<Object> get props => [id, name, division, season, badge];
 }
 
 List<League> mockLeagues = [
   League(
-      id: "1",
-      league: "Premiere League",
-      sport: "Soccer",
-      leagueAlternate: "ulululu"),
-  League(
-      id: "2",
-      league: "Premiere League",
-      sport: "Soccer",
-      leagueAlternate: "ulululu"),
-  League(
-      id: "3",
-      league: "Premiere League",
-      sport: "Soccer",
-      leagueAlternate: "ulululu")
+      id: "4617",
+      name: "Albanian Superliga",
+      division: "1",
+      season: "2020-2021",
+      badge:
+          "https://www.thesportsdb.com/images/media/league/badge/6my1u31578828133.png"),
 ];
