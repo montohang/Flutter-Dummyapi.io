@@ -9,22 +9,13 @@ class LeagueOfCountryPage extends StatefulWidget {
 }
 
 class _LeagueOfCountryPageState extends State<LeagueOfCountryPage> {
-  LeaguesOfCountryCubit leagueCubit =
-      BlocProvider.of<LeaguesOfCountryCubit>(context);
+  LeaguesOfCountryCubit leagueCubit = LeaguesOfCountryCubit();
 
-  LeaguesOfCountry leaguesOfCountry;
   // _LeagueOfCountryPageState(this.leaguesOfCountry);
 
   @override
   void initState() {
-    context
-        .read<LeaguesOfCountryCubit>()
-        .getLeaguesOfCountry(leaguesOfCountry.id);
-    //     .read<LeaguesOfCountryCubit>()
-    //     .getLeaguesOfCountry(leaguesOfCountry.id);
-
-    // LeaguesOfCountryCubit.getLeaguesOfCountry(leaguesOfCountry.id);
-
+    context.read<LeaguesOfCountryCubit>().getLeaguesOfCountry('England');
     super.initState();
   }
 
