@@ -4,15 +4,18 @@ class League extends Equatable {
   final String id;
   final String name;
   final String division;
+  final String sport;
   final String season;
   final String badge;
 
-  League({this.id, this.name, this.division, this.season, this.badge});
+  League(
+      {this.id, this.name, this.division, this.sport, this.season, this.badge});
 
   factory League.fromJson(Map<String, dynamic> json) => League(
       id: json['idLeague'],
       name: json['strLeague'],
       division: json['strDivision'],
+      sport: json['strSport'],
       season: json['strCurrentSeason'],
       badge: json['strBadge']);
 

@@ -8,11 +8,11 @@ class LeagueServices {
 
     // var endpointUrl = baseUrl;
 
-    Map<String, String> queryParams = {'s': 'Soccer'};
+    // Map<String, String> queryParams = {'s': 'Soccer'};
 
-    String queryString = Uri(queryParameters: queryParams).query;
+    // String queryString = Uri(queryParameters: queryParams).query;
 
-    var requestUrl = baseUrl + '?' + queryString;
+    var requestUrl = baseUrlLeague;
 
     var response = await client.get(requestUrl);
 
@@ -22,10 +22,10 @@ class LeagueServices {
 
     var data = jsonDecode(response.body);
 
-    print('data dari service : $data');
+    print('data dari service league : $data');
 
     List<League> leagues =
-        (data['countrys'] as Iterable).map((e) => League.fromJson(e)).toList();
+        (data['leagues'] as Iterable).map((e) => League.fromJson(e)).toList();
     return ApiReturnValue(value: leagues);
   }
 

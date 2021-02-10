@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_thesportdb/cubit/league_cubit.dart';
-import 'package:flutter_thesportdb/cubit/leagues_of_country_cubit.dart';
+import 'package:flutter_thesportdb/cubit/team_cubit.dart';
 import 'package:flutter_thesportdb/shared/shared.dart';
-import 'package:http/http.dart';
 import 'package:supercharged/supercharged.dart';
 import 'package:flutter_thesportdb/models/models.dart';
 
@@ -15,5 +14,5 @@ part 'splash_screen.dart';
 part 'general_page.dart';
 part 'main_page.dart';
 part 'league_page.dart';
+part 'team_page.dart';
 part 'sport_page.dart';
-part 'league_of_country_page.dart';

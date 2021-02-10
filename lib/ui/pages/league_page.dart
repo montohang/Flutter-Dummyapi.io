@@ -8,8 +8,6 @@ class LeaguePage extends StatefulWidget {
 class _LeaguePageState extends State<LeaguePage> {
   LeagueCubit leagueCubit = LeagueCubit();
 
-  LeaguesOfCountry leaguesOfCountry;
-
   @override
   void initState() {
     context.read<LeagueCubit>().getLeagues();
@@ -34,10 +32,11 @@ class _LeaguePageState extends State<LeaguePage> {
                         elevation: 1,
                         child: ListTile(
                           title: Text(league.name),
-                          subtitle: Text(league.division),
+                          subtitle: Text(league.sport),
                           onTap: () {
-                            Get.to(LeagueOfCountryPage(
-                                leagueName: leaguesOfCountry.name));
+                            Get.to(TeamPage(
+                              leagueName: league.name,
+                            ));
                           },
                         ),
                       );

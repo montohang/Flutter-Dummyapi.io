@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_thesportdb/cubit/leagues_of_country_cubit.dart';
+import 'package:flutter_thesportdb/cubit/team_cubit.dart';
 import 'package:flutter_thesportdb/ui/pages/pages.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
           create: (context) => LeagueCubit(),
         ),
         BlocProvider(
-          create: (context) => LeaguesOfCountryCubit(),
+          create: (context) => TeamCubit(),
         ),
       ],
       child: GetMaterialApp(
