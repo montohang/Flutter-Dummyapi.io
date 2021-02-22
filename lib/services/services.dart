@@ -11,3 +11,6 @@ String baseUrlLeague =
 
 String baseUrlTeam =
     'https://www.thesportsdb.com/api/v1/json/1/search_all_teams.php';
+
+String searchUrlTeam =
+    'https://www.thesportsdb.com/api/v1/json/1/searchteams.php';

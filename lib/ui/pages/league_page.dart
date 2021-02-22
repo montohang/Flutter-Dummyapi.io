@@ -16,35 +16,51 @@ class _LeaguePageState extends State<LeaguePage> {
 
   @override
   Widget build(BuildContext context) {
-    return GeneralPage(
-      title: 'Leagues',
-      subtitle: 'Let’s get list of the best leagues',
-      child: Container(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          child: BlocBuilder<LeagueCubit, LeagueState>(
-            builder: (_, state) => (state is LeagueLoaded)
-                ? ListView.builder(
-                    itemCount: state.leagues.length,
-                    itemBuilder: (context, index) {
-                      League league = state.leagues[index];
-                      return Card(
-                        elevation: 1,
-                        child: ListTile(
-                          title: Text(league.name),
-                          subtitle: Text(league.sport),
-                          onTap: () {
-                            Get.to(TeamPage(
-                              leagueName: league.name,
-                            ));
-                          },
-                        ),
-                      );
-                    })
-                : Center(
-                    child: loadingIndicator,
-                  ),
-          )),
+    double listItemWidth = MediaQuery.of(context).size.width;
+    return BlocBuilder<LeagueCubit, LeagueState>(
+      builder: (context, state) {
+        return GeneralPage(
+            title: 'Leagues',
+            subtitle: 'Let’s get list of the best leagues',
+            isLoading: !(state is LeagueLoaded),
+            actions: [
+              GestureDetector(
+                onTap: () {
+                  Get.to(
+                    BlocProvider(
+                      create: (context) => SearchTeamCubit(),
+                      child: SearchTeamPage(),
+                    ),
+                  );
+                },
+                child: Icon(
+                  Icons.search,
+                ),
+              ),
+            ],
+            child: state is LeagueLoaded
+                ? Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height -
+                        124 -
+                        defaultMargin,
+                    child: ListView(
+                      padding: EdgeInsets.only(top: 10),
+                      children: state.leagues
+                          .map((e) => GestureDetector(
+                                onTap: () {
+                                  Get.to(TeamPage(
+                                    leagueName: e.name,
+                                  ));
+                                },
+                                child: LeagueListItem(
+                                    league: e, itemWidth: listItemWidth),
+                              ))
+                          .toList(),
+                    ),
+                  )
+                : SizedBox());
+      },
     );
   }
 }

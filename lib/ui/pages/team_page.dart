@@ -20,33 +20,28 @@ class _TeamPageState extends State<TeamPage> {
 
   @override
   Widget build(BuildContext context) {
-    return GeneralPage(
-      title: 'Teams',
-      subtitle: 'List of the best teams',
-      child: Container(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          child: BlocBuilder<TeamCubit, TeamState>(
-            builder: (_, state) => (state is TeamLoaded)
-                ? ListView.builder(
-                    itemCount: state.teams.length,
-                    itemBuilder: (context, index) {
-                      Teams teams = state.teams[index];
-                      return Card(
-                        elevation: 1,
-                        child: ListTile(
-                          title: Text(teams.name),
-                          subtitle: Text(teams.formedYear),
-                          onTap: () {
-                            // Get.to();
-                          },
-                        ),
-                      );
-                    })
-                : Center(
-                    child: loadingIndicator,
-                  ),
-          )),
+    double listItemWidth = MediaQuery.of(context).size.width;
+    return BlocBuilder<TeamCubit, TeamState>(
+      builder: (context, state) {
+        return GeneralPage(
+            title: 'Teams',
+            subtitle: 'List of the best teams',
+            isLoading: !(state is TeamLoaded),
+            child: state is TeamLoaded
+                ? Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height -
+                        124 -
+                        defaultMargin,
+                    child: ListView(
+                      padding: EdgeInsets.only(top: 10),
+                      children: state.teams
+                          .map((e) =>
+                              TeamListItem(team: e, itemWidth: listItemWidth))
+                          .toList(),
+                    ))
+                : SizedBox());
+      },
     );
   }
 }

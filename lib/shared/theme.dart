@@ -32,3 +32,7 @@ Widget loadingIndicator = SpinKitFadingCircle(
   size: 45,
   color: mainColor,
 );
+
+Widget loadingLottieIndicator = Lottie.asset(
+  'assets/loading_indicator.json',
+);
