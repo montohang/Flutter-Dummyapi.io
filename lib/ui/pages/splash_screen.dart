@@ -4,7 +4,7 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Widget splashScreen = SplashScreenView(
-      home: LeaguePage(),
+      home: MainPage(),
       duration: 3000,
       imageSize: 125,
       imageSrc: "assets/logo.png",

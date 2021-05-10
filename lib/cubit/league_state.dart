@@ -9,6 +9,8 @@ abstract class LeagueState extends Equatable {
 
 class LeagueInitial extends LeagueState {}
 
+class LeagueLoading extends LeagueState {}
+
 class LeagueLoaded extends LeagueState {
   final List<League> leagues;
 

@@ -18,14 +18,14 @@ class LeagueCubit extends Cubit<LeagueState> {
     }
   }
 
-  // Future<void> getLeaguesOfCountry() async {
-  //   ApiReturnValue<List<League>> result =
-  //       await LeagueServices.getLeaguesOfCountry('England');
+  Future<void> getLeaguesOfCountry(String countryName) async {
+    ApiReturnValue<List<League>> result =
+        await LeagueServices.getLeaguesOfCountry(countryName);
 
-  //   if (result.value != null) {
-  //     emit(LeagueLoaded(result.value));
-  //   } else {
-  //     emit(LeagueLoadingFailed(result.message));
-  //   }
-  // }
+    if (result.value != null) {
+      emit(LeagueLoaded(result.value));
+    } else {
+      emit(LeagueLoadingFailed(result.message));
+    }
+  }
 }

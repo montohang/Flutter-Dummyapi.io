@@ -15,7 +15,7 @@ TextStyle greyFontSytle = GoogleFonts.poppins().copyWith(
 TextStyle blackFontSytle1 = GoogleFonts.poppins().copyWith(
   color: Colors.black,
   fontSize: 22,
-  fontWeight: FontWeight.w500,
+  fontWeight: FontWeight.bold,
 );
 TextStyle blackFontSytle2 = GoogleFonts.poppins().copyWith(
   color: Colors.black,
@@ -31,4 +31,8 @@ const double defaultMargin = 24;
 Widget loadingIndicator = SpinKitFadingCircle(
   size: 45,
   color: mainColor,
+);
+
+Widget loadingLottieIndicator = Lottie.asset(
+  'assets/loading_indicator.json',
 );
