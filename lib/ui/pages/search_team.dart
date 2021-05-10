@@ -11,65 +11,96 @@ class _SearchTeamPageState extends State<SearchTeamPage> {
   @override
   Widget build(BuildContext context) {
     double listItemWidth = MediaQuery.of(context).size.width;
-    return Scaffold(
-      appBar: AppBar(
-        title: TextField(
-            controller: _searchTeamController,
-            decoration: InputDecoration(
-              hintText: "find your team",
-            ),
-            keyboardType: TextInputType.text,
-            textInputAction: TextInputAction.search,
-            onChanged: (value) {
-              if (value.length >= 1) {
-                context.read<SearchTeamCubit>().searchTeam(value);
-              }
+    return BlocBuilder<SearchTeamCubit, SearchTeamState>(
+      builder: (context, state) {
+        return GeneralPage(
+            title: 'Search',
+            subtitle: 'Find your team',
+            onBackButtonPressed: () {
+              Get.back();
             },
-            onSubmitted: (value) =>
-                context.read<SearchTeamCubit>().searchTeam(value)),
-      ),
-      body: BlocBuilder<SearchTeamCubit, SearchTeamState>(
-        builder: (context, state) {
-          if (state is SearchTeamLoaded) {
-            return ListView.builder(
-              itemCount: state.teams.length,
-              itemBuilder: (BuildContext context, int index) {
-                return Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height,
-                  child: ListView(
-                    padding: EdgeInsets.only(top: 10),
-                    children: state.teams
-                        .map(
-                          (e) => TeamListItem(
-                            team: e,
-                            itemWidth: listItemWidth,
+            child: Stack(children: [
+              Container(
+                width: double.infinity,
+                height: MediaQuery.of(context).size.height,
+                child: ListView(children: [
+                  Container(
+                    width: double.infinity,
+                    margin: EdgeInsets.fromLTRB(
+                      defaultMargin,
+                      0,
+                      defaultMargin,
+                      defaultMargin,
+                    ),
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(8),
+                      boxShadow: [
+                        BoxShadow(
+                          color: mainColor,
+                          offset: Offset.zero,
+                          blurRadius: 0.5,
+                          spreadRadius: 0.5,
+                        ),
+                      ],
+                    ),
+                    child: TextField(
+                      controller: _searchTeamController,
+                      decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText: "find your favorite team",
+                          labelStyle: greyFontSytle),
+                      keyboardType: TextInputType.text,
+                      textInputAction: TextInputAction.search,
+                      onChanged: (value) {
+                        if (value.length >= 1) {
+                          context.read<SearchTeamCubit>().searchTeam(value);
+                        }
+                      },
+                      onSubmitted: (value) =>
+                          context.read<SearchTeamCubit>().searchTeam(value),
+                    ),
+                  ),
+                  state is SearchTeamLoaded
+                      ? Container(
+                          width: double.infinity,
+                          height: MediaQuery.of(context).size.height - 202,
+                          color: Colors.white,
+                          child: StaggeredGridView.countBuilder(
+                            crossAxisCount: 3,
+                            itemCount: state.teams.length,
+                            itemBuilder: (context, index) => SeacrhTeamListItem(
+                              team: state.teams[index],
+                              itemWidth: listItemWidth,
+                            ),
+                            staggeredTileBuilder: (index) =>
+                                StaggeredTile.count((index % 7 == 0) ? 2 : 1,
+                                    (index % 7 == 0) ? 2 : 1),
+                            crossAxisSpacing: 2.0,
+                            mainAxisSpacing: 2.0,
                           ),
                         )
-                        .toList(),
-                  ),
-                );
-              },
-            );
-          } else if (state is SearchTeamFailed) {
-            return Center(
-                child: Text(
-              state.message,
-            ));
-          } else if (state is SearchTeamInitial) {
-            return Center(
-              child: Text('Type a team name'),
-            );
-          } else {
-            return Center(
-              child: Container(
-                width: MediaQuery.of(context).size.width / 3,
-                child: loadingLottieIndicator,
+                      : state is SearchTeamFailed
+                          ? Center(
+                              child: Text(
+                              state.message,
+                            ))
+                          : state is SearchTeamInitial
+                              ? Center(
+                                  child: Text('Type a team name'),
+                                )
+                              : Center(
+                                  child: Container(
+                                    width:
+                                        MediaQuery.of(context).size.width / 4,
+                                    child: loadingLottieIndicator,
+                                  ),
+                                ),
+                ]),
               ),
-            );
-          }
-        },
-      ),
+            ]));
+      },
     );
   }
 }

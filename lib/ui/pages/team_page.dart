@@ -30,15 +30,30 @@ class _TeamPageState extends State<TeamPage> {
             child: state is TeamLoaded
                 ? Container(
                     width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height -
-                        124 -
+                    height:
+                        MediaQuery.of(context).size.height - defaultMargin - 90,
+                    child: GridView.builder(
+                      padding: EdgeInsets.all(
                         defaultMargin,
-                    child: ListView(
-                      padding: EdgeInsets.only(top: 10),
-                      children: state.teams
-                          .map((e) =>
-                              TeamListItem(team: e, itemWidth: listItemWidth))
-                          .toList(),
+                      ),
+                      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                        maxCrossAxisExtent: 300,
+                        childAspectRatio: 2 / 3,
+                        mainAxisSpacing: 0,
+                        crossAxisSpacing: 10,
+                      ),
+                      itemCount: state.teams.length,
+                      itemBuilder: (context, index) => GestureDetector(
+                        onTap: () {
+                          Get.to(TeamDetailsPage(
+                            teamID: state.teams[index].id,
+                          ));
+                        },
+                        child: TeamListItem(
+                          team: state.teams[index],
+                          itemWidth: listItemWidth,
+                        ),
+                      ),
                     ))
                 : SizedBox());
       },

@@ -30,18 +30,19 @@ class Teams extends Equatable {
   });
 
   factory Teams.fromJson(Map<String, dynamic> json) => Teams(
-      id: json['idTeam'],
-      name: json['strTeam'],
-      nameAlternate: json['strAlternate'],
-      formedYear: json['intFormedYear'],
-      stadium: json['strStadium'],
-      urlWebsite: json['strWebsite'],
-      urlTwitter: json['strTwitter'],
-      urlInstagram: json['strInstagram'],
-      urlYoutube: json['strYoutube'],
-      description: json['strDescriptionEN'],
-      badge: json['strTeamBadge'],
-      jersey: json['strTeamJersey']);
+        id: json['idTeam'],
+        name: json['strTeam'],
+        nameAlternate: json['strAlternate'],
+        formedYear: json['intFormedYear'],
+        stadium: json['strStadium'],
+        urlWebsite: json['strWebsite'],
+        urlTwitter: json['strTwitter'],
+        urlInstagram: json['strInstagram'],
+        urlYoutube: json['strYoutube'],
+        description: json['strDescriptionEN'],
+        badge: json['strTeamBadge'],
+        jersey: json['strTeamJersey'],
+      );
 
   @override
   List<Object> get props => [

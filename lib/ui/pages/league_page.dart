@@ -49,12 +49,14 @@ class _LeaguePageState extends State<LeaguePage> {
                       children: state.leagues
                           .map((e) => GestureDetector(
                                 onTap: () {
-                                  Get.to(TeamPage(
-                                    leagueName: e.name,
+                                  Get.to(LeagueDetailsPage(
+                                    leagueID: e.id,
                                   ));
                                 },
                                 child: LeagueListItem(
-                                    league: e, itemWidth: listItemWidth),
+                                  league: e,
+                                  itemWidth: listItemWidth,
+                                ),
                               ))
                           .toList(),
                     ),

@@ -30,30 +30,35 @@ class LeagueServices {
   }
 
   /// servis untuk mendapatkan data liga berdasarkan category dan negara
-  // static Future<ApiReturnValue<List<League>>> getLeaguesOfCountry(
-  //     String leagueName,
-  //     {http.Client client}) async {
-  //   client ??= http.Client();
+  static Future<ApiReturnValue<List<League>>> getLeaguesOfCountry(
+      String countryName,
+      {http.Client client}) async {
+    client ??= http.Client();
 
-  //   Map<String, String> queryParams = {'c': leagueName};
+    Map<String, String> queryParams = {'c': countryName};
 
-  //   String queryString = Uri(queryParameters: queryParams).query;
+    String queryString = Uri(queryParameters: queryParams).query;
 
-  //   var requestUrl = baseUrl + '?' + queryString;
+    var requestUrl = baseUrlLeague + '?' + queryString;
 
-  //   var response = await client.get(requestUrl);
+    var response = await client.get(requestUrl);
 
-  //   if (response.statusCode != 200) {
-  //     return ApiReturnValue(message: 'Please try again :(');
-  //   }
+    if (response.statusCode != 200) {
+      return ApiReturnValue(message: 'Please try again :(');
+    }
 
-  //   var data = jsonDecode(response.body);
+    var data = jsonDecode(response.body);
 
-  //   print('data dari service getLeaguesOfCountry : $data');
+    print('data dari service getLeaguesOfCountry : $data');
 
-  //   List<League> leagues =
-  //       (data['countrys'] as Iterable).map((e) => League.fromJson(e)).toList();
+    List<League> leagues = data['countrys'] == null
+        ? null
+        : (data['countrys' as Iterable])
+            .map((e) => League.fromJson(e))
+            .toList();
 
-  //   return ApiReturnValue(value: leagues);
-  // }
+    return ApiReturnValue(
+        value: leagues,
+        message: data['countrys'] == null ? "League not found" : '');
+  }
 }
